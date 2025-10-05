@@ -2,8 +2,25 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 dotenv.config();
+
+const connectDB = async () => {
+  try {
+    mongoose.set("strictQuery", false);
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB Connected");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+    process.exit(1);
+  }
+};
+connectDB();
+
 const app = express();
 app.use(express.json());
 app.use(
