@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 dotenv.config();
 
+// connect mongodb atlas
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", false);
